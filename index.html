@@ -15,13 +15,14 @@
     .card button { background: #111; color: white; border: none; padding: .6rem 1rem; border-radius: 5px; cursor: pointer; }
     .card button:hover { background: #333; }
     #cart { margin-top: 2rem; background: white; padding: 1rem; border-radius: 8px; }
+    input { width:100%; padding:.6rem; margin-bottom:.7rem; }
   </style>
 </head>
 <body>
 
 <header>
   <h1>MyRoids</h1>
-  <p>search use only</p>
+  <p>research use only</p>
 </header>
 
 <div class="container">
@@ -34,11 +35,20 @@
     <p><strong>Total :</strong> <span id="total">0</span> CHF</p>
 
     <h3>Informations client</h3>
-    <input id="email" type="email" placeholder="Adresse e-mail" style="width:100%;padding:.6rem;margin-bottom:.8rem" />
+    <input id="email" type="email" placeholder="Adresse e-mail" />
+
+    <h3>Adresse de livraison</h3>
+    <input id="fullname" placeholder="Nom et prénom" />
+    <input id="address" placeholder="Adresse" />
+    <input id="city" placeholder="Ville" />
+    <input id="postal" placeholder="Code postal" />
+    <input id="country" placeholder="Pays" />
 
     <h3>Paiement crypto</h3>
     <p>Envoyer exactement le montant à l'adresse suivante :</p>
-    <code style="display:block;padding:.6rem;background:#eee;border-radius:5px;">bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv</code>
+    <code style="display:block;padding:.6rem;background:#eee;border-radius:5px;">
+      bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv
+    </code>
 
     <button onclick="checkout()">J'ai payé</button>
   </div>
@@ -52,7 +62,6 @@
   ];
 
   const cart = [];
-
   const productsDiv = document.getElementById("products");
   const cartItems = document.getElementById("cart-items");
   const totalSpan = document.getElementById("total");
@@ -86,11 +95,23 @@
       li.textContent = `${item.name} - ${item.price} CHF`;
       cartItems.appendChild(li);
     });
-    totalSpan.textContent = total;
+    totalSpan.textContent = total.toFixed(2);
   }
 
   function checkout() {
-    alert("Paiement non configuré. Voir instructions.");
+    const email = document.getElementById("email").value;
+    const fullname = document.getElementById("fullname").value;
+    const address = document.getElementById("address").value;
+    const city = document.getElementById("city").value;
+    const postal = document.getElementById("postal").value;
+    const country = document.getElementById("country").value;
+
+    if (!email || !fullname || !address || !city || !postal || !country) {
+      alert("Merci de remplir toutes les informations de livraison.");
+      return;
+    }
+
+    alert("Commande enregistrée ✅\nAdresse bien reçue.");
   }
 
   renderProducts();
