@@ -6,40 +6,28 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
   <style>
-    :root {
-      --bg: #0b0b0e;
-      --card: #15151c;
-      --accent: #6cf2c2;
-      --text: #e6e6eb;
-      --muted: #9a9aa3;
-      --danger: #ff4d4d;
-    }
-
-    * { box-sizing: border-box; }
-
     body {
+      font-family: Arial, sans-serif;
       margin: 0;
-      font-family: "Segoe UI", Arial, sans-serif;
-      background: radial-gradient(circle at top, #12121a, #07070a);
-      color: var(--text);
+      background: #0f0f0f;
+      color: #eaeaea;
     }
 
     header {
-      padding: 2rem 1rem;
+      background: #111;
+      padding: 1.5rem;
       text-align: center;
-      background: linear-gradient(135deg, #0f0f16, #07070a);
-      border-bottom: 1px solid #1f1f2a;
+      border-bottom: 1px solid #333;
     }
 
     header h1 {
       margin: 0;
-      font-size: 2.5rem;
-      letter-spacing: 2px;
+      font-size: 2.2rem;
     }
 
     header p {
-      margin-top: .4rem;
-      color: var(--muted);
+      margin: .3rem 0 0;
+      color: #aaa;
       font-size: .9rem;
     }
 
@@ -49,85 +37,67 @@
       margin: auto;
     }
 
-    h2, h3 {
-      margin-top: 0;
+    h2 {
+      margin-bottom: 1rem;
     }
 
+    /* PRODUITS */
     .products {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-      gap: 1.8rem;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
     }
 
     .card {
-      background: linear-gradient(180deg, #16161f, #101018);
-      border-radius: 14px;
-      padding: 1.2rem;
-      box-shadow: 0 10px 25px rgba(0,0,0,.5);
-      transition: transform .3s ease, box-shadow .3s ease;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .card::before {
-      content: "";
-      position: absolute;
-      inset: 0;
-      background: radial-gradient(circle at top, rgba(108,242,194,.15), transparent 60%);
-      opacity: 0;
-      transition: opacity .3s;
+      background: #1a1a1a;
+      border-radius: 10px;
+      padding: 1rem;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+      transition: transform .2s ease, box-shadow .2s ease;
     }
 
     .card:hover {
-      transform: translateY(-8px) scale(1.02);
-      box-shadow: 0 25px 50px rgba(0,0,0,.7);
-    }
-
-    .card:hover::before {
-      opacity: 1;
+      transform: translateY(-5px);
+      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
     }
 
     .card img {
       width: 100%;
-      border-radius: 10px;
-      margin-bottom: .8rem;
+      border-radius: 8px;
+      margin-bottom: .7rem;
     }
 
     .card h3 {
       margin: .4rem 0;
       text-transform: uppercase;
-      letter-spacing: 1px;
     }
 
     .card p {
-      color: var(--accent);
       font-weight: bold;
-      margin-bottom: .8rem;
+      color: #6cf2c2;
     }
 
     .card button {
       width: 100%;
-      padding: .7rem;
-      border-radius: 10px;
+      padding: .6rem;
       border: none;
-      background: linear-gradient(135deg, var(--accent), #3fd3a3);
+      border-radius: 6px;
+      background: #6cf2c2;
       color: #000;
       font-weight: bold;
       cursor: pointer;
-      transition: transform .2s ease, box-shadow .2s ease;
     }
 
     .card button:hover {
-      transform: scale(1.05);
-      box-shadow: 0 0 20px rgba(108,242,194,.6);
+      background: #4fd3a6;
     }
 
+    /* PANIER */
     #cart {
       margin-top: 3rem;
-      background: linear-gradient(180deg, #15151e, #0f0f16);
+      background: #1a1a1a;
       padding: 1.5rem;
-      border-radius: 16px;
-      box-shadow: 0 15px 35px rgba(0,0,0,.6);
+      border-radius: 10px;
     }
 
     #cart ul {
@@ -137,54 +107,42 @@
 
     #cart li {
       padding: .4rem 0;
-      border-bottom: 1px solid #1f1f2a;
-      font-size: .9rem;
+      border-bottom: 1px solid #333;
     }
 
     input {
       width: 100%;
-      padding: .7rem;
-      margin-bottom: .7rem;
-      border-radius: 10px;
-      border: 1px solid #262633;
-      background: #0b0b10;
-      color: var(--text);
-    }
-
-    input:focus {
-      outline: none;
-      border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(108,242,194,.4);
+      padding: .6rem;
+      margin-bottom: .6rem;
+      border-radius: 6px;
+      border: none;
     }
 
     code {
       display: block;
-      padding: .7rem;
-      background: #0b0b10;
-      border-radius: 10px;
-      font-size: .8rem;
+      background: #000;
+      padding: .6rem;
+      border-radius: 6px;
+      font-size: .85rem;
+      color: #6cf2c2;
       word-break: break-all;
-      color: var(--accent);
-      border: 1px solid #262633;
     }
 
     #cart button {
       margin-top: 1rem;
       width: 100%;
-      padding: .9rem;
-      border-radius: 12px;
+      padding: .8rem;
       border: none;
-      background: linear-gradient(135deg, #6cf2c2, #42d39f);
+      border-radius: 6px;
+      background: #6cf2c2;
       color: #000;
-      font-weight: bold;
       font-size: 1rem;
+      font-weight: bold;
       cursor: pointer;
-      transition: box-shadow .2s, transform .2s;
     }
 
     #cart button:hover {
-      transform: scale(1.03);
-      box-shadow: 0 0 25px rgba(108,242,194,.7);
+      background: #4fd3a6;
     }
   </style>
 </head>
@@ -200,4 +158,90 @@
   <h2>Produits</h2>
   <div class="products" id="products"></div>
 
-  <div
+  <div id="cart">
+    <h2>Panier</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total :</strong> <span id="total">0</span> CHF</p>
+
+    <h3>Informations client</h3>
+    <input id="email" type="email" placeholder="Adresse e-mail" />
+
+    <h3>Adresse de livraison</h3>
+    <input id="fullname" placeholder="Nom et prénom" />
+    <input id="address" placeholder="Adresse" />
+    <input id="city" placeholder="Ville" />
+    <input id="postal" placeholder="Code postal" />
+    <input id="country" placeholder="Pays" />
+
+    <h3>Paiement crypto</h3>
+    <p>Envoyer exactement le montant à l'adresse suivante :</p>
+    <code>
+      bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv
+    </code>
+
+    <button onclick="checkout()">J'ai payé</button>
+  </div>
+</div>
+
+<script>
+  const products = [
+    { id: 1, name: "mk-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
+    { id: 2, name: "noopept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
+    { id: 3, name: "Rad-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" },
+    { id: 4, name: "hgh50iu", price: 60, image: "zuvzhuvhv.jpeg" }
+  ];
+
+  const cart = [];
+  const productsDiv = document.getElementById("products");
+  const cartItems = document.getElementById("cart-items");
+  const totalSpan = document.getElementById("total");
+
+  function renderProducts() {
+    productsDiv.innerHTML = "";
+    products.forEach(p => {
+      const div = document.createElement("div");
+      div.className = "card";
+      div.innerHTML = `
+        <img src="${p.image}">
+        <h3>${p.name}</h3>
+        <p>${p.price} CHF</p>
+        <button onclick="addToCart(${p.id})">Ajouter au panier</button>
+      `;
+      productsDiv.appendChild(div);
+    });
+  }
+
+  function addToCart(id) {
+    const product = products.find(p => p.id === id);
+    cart.push(product);
+    renderCart();
+  }
+
+  function renderCart() {
+    cartItems.innerHTML = "";
+    let total = 0;
+    cart.forEach(item => {
+      total += item.price;
+      const li = document.createElement("li");
+      li.textContent = `${item.name} - ${item.price} CHF`;
+      cartItems.appendChild(li);
+    });
+    totalSpan.textContent = total.toFixed(2);
+  }
+
+  function checkout() {
+    const fields = ["email","fullname","address","city","postal","country"];
+    for (let f of fields) {
+      if (!document.getElementById(f).value) {
+        alert("Merci de remplir toutes les informations.");
+        return;
+      }
+    }
+    alert("Commande enregistrée ✅");
+  }
+
+  renderProducts();
+</script>
+
+</body>
+</html>
