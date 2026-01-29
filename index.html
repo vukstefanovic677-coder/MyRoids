@@ -8,14 +8,42 @@
     body { font-family: Arial, sans-serif; margin: 0; background: #f5f5f5; }
     header { background: #111; color: grey; padding: 1rem; text-align: center; }
     .container { padding: 2rem; }
-    .products { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 1.5rem; }
-    .card { background: grey; border-radius: 8px; padding: 1rem; box-shadow: 0 2px 8px rgba(0,0,0,0.1); }
-    .card img { width: 100%; border-radius: 6px; }
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+    .card {
+      background: grey;
+      border-radius: 8px;
+      padding: 1rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+    .card img {
+      width: 100%;
+      border-radius: 6px;
+    }
     .card h3 { margin: .5rem 0; }
-    .card button { background: #111; color: grey; border: none; padding: .6rem 1rem; border-radius: 5px; cursor: pointer; }
+    .card button {
+      background: #111;
+      color: grey;
+      border: none;
+      padding: .6rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+    }
     .card button:hover { background: #333; }
-    #cart { margin-top: 2rem; background: grey; padding: 1rem; border-radius: 8px; }
-    input { width:100%; padding:.6rem; margin-bottom:.7rem; }
+    #cart {
+      margin-top: 2rem;
+      background: grey;
+      padding: 1rem;
+      border-radius: 8px;
+    }
+    input {
+      width: 100%;
+      padding: .6rem;
+      margin-bottom: .7rem;
+    }
   </style>
 </head>
 <body>
@@ -55,10 +83,12 @@
 </div>
 
 <script>
+  // ✅ ICI : 4 PRODUITS = 4 IMAGES
   const products = [
-    { id: 1, name: "mk-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
-    { id: 2, name: "noonpept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
-    { id: 3, name: "Rad-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" }
+    { id: 1, name: "mk-677", price: 45, image: "images/mk677.jpg" },
+    { id: 2, name: "noopept", price: 26.95, image: "images/noopept.jpg" },
+    { id: 3, name: "Rad-140", price: 64.85, image: "images/rad140.jpg" },
+    { id: 4, name: "hgh50iu", price: 60, image: "hgh.jpeg" },
   ];
 
   const cart = [];
@@ -67,11 +97,12 @@
   const totalSpan = document.getElementById("total");
 
   function renderProducts() {
+    productsDiv.innerHTML = "";
     products.forEach(p => {
       const div = document.createElement("div");
       div.className = "card";
       div.innerHTML = `
-        <img src="${p.image}" />
+        <img src="${p.image}" alt="${p.name}">
         <h3>${p.name}</h3>
         <p>${p.price} CHF</p>
         <button onclick="addToCart(${p.id})">Ajouter au panier</button>
