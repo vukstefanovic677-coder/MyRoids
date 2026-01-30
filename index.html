@@ -1,317 +1,235 @@
-<style>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MyRoids</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-/* ================== GOD MODE CSS ================== */
-* {
-  box-sizing: border-box;
-  scroll-behavior: smooth;
+  <style>
+/* ===== BASE EXISTANTE ===== */
+body { 
+  font-family: Arial, sans-serif; 
+  margin:0; 
+  background:#0f0f0f; 
+  color:#eaeaea; 
 }
 
-body {
-  font-family: Arial, sans-serif;
-  margin: 0;
-  background:
-    repeating-linear-gradient(
-      0deg,
-      rgba(255,255,255,0.02),
-      rgba(255,255,255,0.02) 1px,
-      transparent 1px,
-      transparent 2px
-    ),
-    radial-gradient(circle at top, #1e1e1e, #050505);
-  color: #eaeaea;
-  animation: bodyBoot 1.6s ease forwards;
-  overflow-x: hidden;
+header { 
+  background:#111; 
+  padding:1.5rem; 
+  text-align:center; 
+  border-bottom:1px solid #333; 
 }
 
-@keyframes bodyBoot {
-  0% { opacity:0; filter: blur(20px) brightness(0.3); }
-  100% { opacity:1; filter:none; }
+header h1 { 
+  margin:0; 
+  font-size:2.4rem; 
+  letter-spacing:3px;
 }
 
-/* ================== SCANLINES ================== */
-body::after {
-  content:"";
-  position: fixed;
-  inset:0;
-  background: linear-gradient(
-    rgba(255,255,255,0.03) 50%,
-    rgba(0,0,0,0.05) 50%
-  );
-  background-size: 100% 4px;
-  pointer-events:none;
-  mix-blend-mode: overlay;
+header p { 
+  margin:.3rem 0 0; 
+  color:#aaa; 
+  font-size:.9rem; 
 }
 
-/* ================== HEADER ================== */
-header {
-  background: linear-gradient(145deg,#0b0b0b,#151515);
-  padding: 2rem;
-  text-align:center;
-  border-bottom:1px solid #333;
-  position: relative;
-  overflow:hidden;
+/* ===== TEXTE AJOUTÉ ===== */
+.subtitle {
+  margin-top:.8rem;
+  font-size:1rem;
+  color:#6cf2c2;
+  animation: subtitleGlow 2s infinite;
 }
 
-header::before {
-  content:"";
-  position:absolute;
-  inset:-200%;
-  background: conic-gradient(
-    from 0deg,
-    transparent,
-    #6cf2c2,
-    transparent
-  );
-  animation: hyperRotate 10s linear infinite;
-  opacity:.2;
+@keyframes subtitleGlow {
+  0%,100% { text-shadow:0 0 5px #6cf2c2; }
+  50% { text-shadow:0 0 15px #6cf2c2; }
 }
 
-@keyframes hyperRotate {
-  to { transform: rotate(360deg); }
+/* ===== CONTAINER ===== */
+.container { 
+  padding:2rem; 
+  max-width:1200px; 
+  margin:auto; 
 }
 
-header h1 {
-  margin:0;
-  font-size:2.6rem;
-  letter-spacing:4px;
-  text-transform:uppercase;
-  animation: glitch 2.5s infinite;
+.info-text {
+  margin-bottom:2rem;
+  color:#bbb;
+  line-height:1.6;
+  animation: fadeIn 1s ease;
 }
 
-@keyframes glitch {
-  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  20% { text-shadow: -2px 0 red, 2px 0 cyan; }
-  40% { text-shadow: 2px 0 red, -2px 0 cyan; }
-  100% { text-shadow:none; }
+@keyframes fadeIn {
+  from { opacity:0; transform:translateY(20px); }
+  to { opacity:1; transform:none; }
 }
 
-header p {
-  color:#aaa;
-  animation: flicker 3s infinite;
+/* ===== PRODUITS ===== */
+.products { 
+  display:grid; 
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); 
+  gap:1.5rem; 
 }
 
-@keyframes flicker {
-  0%,100%{opacity:1;}
-  50%{opacity:.6;}
-}
-
-/* ================== CONTAINER ================== */
-.container {
-  padding:2.2rem;
-  max-width:1200px;
-  margin:auto;
-  animation: containerZoom .9s ease;
-}
-
-@keyframes containerZoom {
-  from { transform:scale(.94); opacity:0; }
-  to { transform:scale(1); opacity:1; }
-}
-
-/* ================== TITLES ================== */
-h2,h3 {
+.card { 
+  background:#1a1a1a; 
+  border-radius:12px; 
+  padding:1rem; 
+  box-shadow:0 4px 12px rgba(0,0,0,0.6); 
+  transition:0.3s ease; 
   position:relative;
 }
 
-h2::after,h3::after {
-  content:"";
-  display:block;
-  width:80px;
-  height:3px;
+.card:hover { 
+  transform:translateY(-6px); 
+  box-shadow:0 15px 35px rgba(108,242,194,0.3); 
+}
+
+.badge {
+  position:absolute;
+  top:10px;
+  right:10px;
   background:#6cf2c2;
-  margin-top:.5rem;
-  animation: barGrow 1.4s ease;
-}
-
-@keyframes barGrow {
-  from { width:0; }
-  to { width:80px; }
-}
-
-/* ================== PRODUCTS GRID ================== */
-.products {
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-  gap:2rem;
-  perspective:1200px;
-}
-
-/* ================== CARD ================== */
-.card {
-  background: linear-gradient(145deg,#101010,#1d1d1d);
-  border-radius:16px;
-  padding:1.1rem;
-  box-shadow:0 20px 50px rgba(0,0,0,.9);
-  transform-style:preserve-3d;
-  animation: cardSpawn .9s ease both;
-  position:relative;
-  overflow:hidden;
-}
-
-@keyframes cardSpawn {
-  from { opacity:0; transform:translateY(60px) rotateX(20deg); }
-  to { opacity:1; transform:none; }
-}
-
-.card:hover {
-  transform:
-    translateY(-14px)
-    rotateX(6deg)
-    rotateY(-6deg)
-    scale(1.04);
-  box-shadow:0 30px 70px rgba(108,242,194,.35);
-}
-
-.card::before {
-  content:"";
-  position:absolute;
-  inset:0;
-  background: linear-gradient(
-    120deg,
-    transparent,
-    rgba(108,242,194,.3),
-    transparent
-  );
-  transform: translateX(-120%);
-}
-
-.card:hover::before {
-  animation: shine 1.3s ease;
-}
-
-@keyframes shine {
-  to { transform:translateX(120%); }
-}
-
-.card img {
-  width:100%;
-  border-radius:12px;
-  transition:.5s ease;
-}
-
-.card:hover img {
-  transform:scale(1.12) rotate(1deg);
-}
-
-.card h3 {
-  margin:.6rem 0;
-  letter-spacing:1px;
-}
-
-.card p {
-  color:#6cf2c2;
+  color:#000;
+  font-size:.7rem;
   font-weight:bold;
-  animation: neonPulse 2s infinite;
+  padding:.2rem .5rem;
+  border-radius:6px;
 }
 
-@keyframes neonPulse {
-  0%,100% { text-shadow:0 0 6px #6cf2c2; }
-  50% { text-shadow:0 0 22px #6cf2c2; }
+.card img { 
+  width:100%; 
+  border-radius:8px; 
+  margin-bottom:.7rem; 
 }
 
-/* ================== BUTTONS ================== */
-button {
-  width:100%;
-  padding:.9rem;
-  border:none;
-  border-radius:10px;
-  background: linear-gradient(135deg,#6cf2c2,#4fd3a6);
-  font-weight:bold;
-  cursor:pointer;
-  position:relative;
-  overflow:hidden;
+.card h3 { 
+  margin:.4rem 0; 
+  text-transform:uppercase; 
 }
 
-button::after {
-  content:"";
-  position:absolute;
-  inset:0;
-  background: radial-gradient(circle, rgba(255,255,255,.6), transparent 60%);
-  opacity:0;
+.card .desc {
+  font-size:.85rem;
+  color:#aaa;
+  margin-bottom:.4rem;
 }
 
-button:hover::after {
-  animation: clickFlash .6s ease;
+.card p { 
+  font-weight:bold; 
+  color:#6cf2c2; 
 }
 
-@keyframes clickFlash {
-  from { opacity:.6; }
-  to { opacity:0; }
+.card button { 
+  width:100%; 
+  padding:.6rem; 
+  border:none; 
+  border-radius:6px; 
+  background:#6cf2c2; 
+  color:#000; 
+  font-weight:bold; 
+  cursor:pointer; 
 }
 
-button:hover {
-  transform:scale(1.08);
-  box-shadow:0 0 35px rgba(108,242,194,.7);
+.card button:hover { 
+  background:#4fd3a6; 
 }
 
-button:active {
-  animation: shake .3s;
+/* ===== PANIER ===== */
+#cart { 
+  margin-top:3rem; 
+  background:#1a1a1a; 
+  padding:1.5rem; 
+  border-radius:12px; 
 }
 
-@keyframes shake {
-  0%{transform:translateX(0);}
-  25%{transform:translateX(-3px);}
-  50%{transform:translateX(3px);}
-  100%{transform:translateX(0);}
+#cart ul { list-style:none; padding:0; }
+
+#cart li { 
+  padding:.4rem 0; 
+  border-bottom:1px solid #333; 
 }
 
-/* ================== CART ================== */
-#cart {
-  margin-top:3.5rem;
-  background: linear-gradient(145deg,#141414,#202020);
-  padding:1.8rem;
-  border-radius:18px;
-  box-shadow:0 25px 60px rgba(0,0,0,.95);
-  animation: cartRise 1.2s ease;
+/* ===== INPUTS ===== */
+input { 
+  width:100%; 
+  padding:.6rem; 
+  margin-bottom:.6rem; 
+  border-radius:6px; 
+  border:none; 
+  background:#0c0c0c;
+  color:#fff;
 }
 
-@keyframes cartRise {
-  from { opacity:0; transform:translateY(80px); }
-  to { opacity:1; transform:none; }
+/* ===== CODE ===== */
+code { 
+  display:block; 
+  background:#000; 
+  padding:.6rem; 
+  border-radius:6px; 
+  font-size:.85rem; 
+  color:#6cf2c2; 
 }
 
-#cart li {
-  padding:.5rem 0;
-  border-bottom:1px solid #333;
-  animation: listSlide .5s ease;
+/* ===== FOOTER TEXTE ===== */
+.footer {
+  margin-top:3rem;
+  text-align:center;
+  font-size:.8rem;
+  color:#666;
 }
+  </style>
+</head>
 
-@keyframes listSlide {
-  from { opacity:0; transform:translateX(-40px); }
-  to { opacity:1; transform:none; }
-}
+<body>
 
-/* ================== INPUTS ================== */
-input {
-  width:100%;
-  padding:.8rem;
-  margin-bottom:.7rem;
-  border-radius:10px;
-  border:none;
-  background:#0a0a0a;
-  color:white;
-  transition:.3s;
-}
+<header>
+  <h1>MyRoids</h1>
+  <p>research use only</p>
+  <div class="subtitle">Premium compounds • Discreet shipping • Crypto only</div>
+</header>
 
-input:focus {
-  outline:none;
-  transform:scale(1.05);
-  box-shadow:0 0 25px rgba(108,242,194,.8);
-}
+<div class="container">
 
-/* ================== CODE BLOCK ================== */
-code {
-  display:block;
-  background:#000;
-  padding:1rem;
-  border-radius:10px;
-  color:#6cf2c2;
-  animation: terminalGlow 3s infinite;
-}
+  <div class="info-text">
+    Tous nos produits sont sélectionnés pour leur qualité et leur traçabilité.
+    Paiement en crypto uniquement. Livraison rapide et discrète.
+  </div>
 
-@keyframes terminalGlow {
-  0%,100% { box-shadow:0 0 15px rgba(108,242,194,.4); }
-  50% { box-shadow:0 0 35px rgba(108,242,194,.9); }
-}
+  <h2>Produits</h2>
+  <div class="products" id="products"></div>
 
-</style>
+  <div id="cart">
+    <h2>Panier</h2>
+    <ul id="cart-items"></ul>
+    <p><strong>Total :</strong> <span id="total">0</span> CHF</p>
+
+    <h3>Informations client</h3>
+    <input id="email" type="email" placeholder="Adresse e-mail" />
+    <input id="fullname" placeholder="Nom et prénom" />
+
+    <h3>Adresse de livraison</h3>
+    <input id="address" placeholder="Adresse" />
+    <input id="city" placeholder="Ville" />
+    <input id="postal" placeholder="Code postal" />
+    <input id="country" placeholder="Pays" />
+
+    <h3>Paiement crypto</h3>
+    <p>Envoyer exactement le montant à l'adresse suivante :</p>
+    <code>bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv</code>
+
+    <button onclick="checkout()">J'ai payé</button>
+  </div>
+
+  <div class="footer">
+    © 2026 MyRoids – All rights reserved
+  </div>
+
+</div>
+
+<script>
+/* JS IDENTIQUE AU TIEN – PAS TOUCHÉ */
+</script>
+
+</body>
+</html>
