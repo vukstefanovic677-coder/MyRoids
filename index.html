@@ -67,10 +67,10 @@
 </div>
 
 <script>
-const WEBHOOK_URL = "Spidey Bot"; // ⚠️ remplace ici ton webhook
+const WEBHOOK_URL = "Spidey Bot"; // ⚠️ remplace par ton webhook réel
 
 const products = [
-  { id: 1, name: "MK-677", price: 45, "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
+  { id: 1, name: "MK-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
   { id: 2, name: "Noopept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
   { id: 3, name: "RAD-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" },
   { id: 4, name: "HGH 50IU", price: 60, image: "hgh.jpeg" }
@@ -134,7 +134,7 @@ function checkout() {
     total += p.price;
   });
 
-  fetch(https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B, {
+  fetch(WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
