@@ -13,8 +13,8 @@
     .container { padding:2rem; max-width:1200px; margin:auto; }
     h2 { margin-bottom:1rem; }
     .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; }
-    .card { background:#1a1a1a; border-radius:10px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
-    .card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.8); transition:0.2s ease; }
+    .card { background:#1a1a1a; border-radius:10px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.6); transition:0.2s ease; }
+    .card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.8); }
     .card img { width:100%; border-radius:8px; margin-bottom:.7rem; }
     .card h3 { margin:.4rem 0; text-transform:uppercase; }
     .card p { font-weight:bold; color:#6cf2c2; }
@@ -65,7 +65,8 @@
 </div>
 
 <script>
-const = "https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B"; // ⚠️ Remplace par ton vrai webhook
+const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B";
+const BOT_NAME = "Spidey Bot";
 
 const products = [
   { id: 1, name: "MK-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
@@ -132,12 +133,13 @@ function checkout() {
     total += p.price;
   });
 
-  fetch(https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B, {
+  fetch(WEBHOOK_URL, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
+      username: BOT_NAME,
       content:
-`🛒 NOUVELLE COMMANDE
+`🛒 **NOUVELLE COMMANDE**
 
 Nom : ${fullname}
 Email : ${email}
