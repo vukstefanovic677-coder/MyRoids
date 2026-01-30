@@ -58,16 +58,14 @@
 
     <h3>Paiement crypto</h3>
     <p>Envoyer exactement le montant à l'adresse suivante :</p>
-    <code>
-      bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv
-    </code>
+    <code>bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv</code>
 
     <button onclick="checkout()">J'ai payé</button>
   </div>
 </div>
 
 <script>
-const WEBHOOK_URL = "Spidey Bot"; // ⚠️ remplace par ton webhook réel
+const WEBHOOK_URL = "Spidey Bot"; // ⚠️ Remplace par ton vrai webhook
 
 const products = [
   { id: 1, name: "MK-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
@@ -87,7 +85,7 @@ function renderProducts() {
     const div = document.createElement("div");
     div.className = "card";
     div.innerHTML = `
-      <img src="${p.image}">
+      <img src="${p.image}" alt="${p.name}">
       <h3>${p.name}</h3>
       <p>${p.price} CHF</p>
       <button onclick="addToCart(${p.id})">Ajouter au panier</button>
@@ -134,7 +132,7 @@ function checkout() {
     total += p.price;
   });
 
-  fetch(WEBHOOK_URL, {
+  fetch(https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
