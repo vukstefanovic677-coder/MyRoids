@@ -1,149 +1,32 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8">
   <title>MyRoids</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 0;
-      background: #0f0f0f;
-      color: #eaeaea;
-    }
-
-    header {
-      background: #111;
-      padding: 1.5rem;
-      text-align: center;
-      border-bottom: 1px solid #333;
-    }
-
-    header h1 {
-      margin: 0;
-      font-size: 2.2rem;
-    }
-
-    header p {
-      margin: .3rem 0 0;
-      color: #aaa;
-      font-size: .9rem;
-    }
-
-    .container {
-      padding: 2rem;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    h2 {
-      margin-bottom: 1rem;
-    }
-
-    /* PRODUITS */
-    .products {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
-      background: #1a1a1a;
-      border-radius: 10px;
-      padding: 1rem;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.6);
-      transition: transform .2s ease, box-shadow .2s ease;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 10px 25px rgba(0,0,0,0.8);
-    }
-
-    .card img {
-      width: 100%;
-      border-radius: 8px;
-      margin-bottom: .7rem;
-    }
-
-    .card h3 {
-      margin: .4rem 0;
-      text-transform: uppercase;
-    }
-
-    .card p {
-      font-weight: bold;
-      color: #6cf2c2;
-    }
-
-    .card button {
-      width: 100%;
-      padding: .6rem;
-      border: none;
-      border-radius: 6px;
-      background: #6cf2c2;
-      color: #000;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    .card button:hover {
-      background: #4fd3a6;
-    }
-
-    /* PANIER */
-    #cart {
-      margin-top: 3rem;
-      background: #1a1a1a;
-      padding: 1.5rem;
-      border-radius: 10px;
-    }
-
-    #cart ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    #cart li {
-      padding: .4rem 0;
-      border-bottom: 1px solid #333;
-    }
-
-    input {
-      width: 100%;
-      padding: .6rem;
-      margin-bottom: .6rem;
-      border-radius: 6px;
-      border: none;
-    }
-
-    code {
-      display: block;
-      background: #000;
-      padding: .6rem;
-      border-radius: 6px;
-      font-size: .85rem;
-      color: #6cf2c2;
-      word-break: break-all;
-    }
-
-    #cart button {
-      margin-top: 1rem;
-      width: 100%;
-      padding: .8rem;
-      border: none;
-      border-radius: 6px;
-      background: #6cf2c2;
-      color: #000;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    #cart button:hover {
-      background: #4fd3a6;
-    }
+    body { font-family: Arial, sans-serif; margin:0; background:#0f0f0f; color:#eaeaea; }
+    header { background:#111; padding:1.5rem; text-align:center; border-bottom:1px solid #333; }
+    header h1 { margin:0; font-size:2.2rem; }
+    header p { margin:.3rem 0 0; color:#aaa; font-size:.9rem; }
+    .container { padding:2rem; max-width:1200px; margin:auto; }
+    h2 { margin-bottom:1rem; }
+    .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; }
+    .card { background:#1a1a1a; border-radius:10px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.6); }
+    .card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.8); transition:0.2s ease; }
+    .card img { width:100%; border-radius:8px; margin-bottom:.7rem; }
+    .card h3 { margin:.4rem 0; text-transform:uppercase; }
+    .card p { font-weight:bold; color:#6cf2c2; }
+    .card button { width:100%; padding:.6rem; border:none; border-radius:6px; background:#6cf2c2; color:#000; font-weight:bold; cursor:pointer; }
+    .card button:hover { background:#4fd3a6; }
+    #cart { margin-top:3rem; background:#1a1a1a; padding:1.5rem; border-radius:10px; }
+    #cart ul { list-style:none; padding:0; }
+    #cart li { padding:.4rem 0; border-bottom:1px solid #333; }
+    input { width:100%; padding:.6rem; margin-bottom:.6rem; border-radius:6px; border:none; }
+    code { display:block; background:#000; padding:.6rem; border-radius:6px; font-size:.85rem; color:#6cf2c2; word-break:break-all; }
+    button { margin-top:1rem; width:100%; padding:.8rem; border:none; border-radius:6px; background:#6cf2c2; color:#000; font-weight:bold; cursor:pointer; }
+    button:hover { background:#4fd3a6; }
   </style>
 </head>
 
@@ -165,9 +48,9 @@
 
     <h3>Informations client</h3>
     <input id="email" type="email" placeholder="Adresse e-mail" />
+    <input id="fullname" placeholder="Nom et prénom" />
 
     <h3>Adresse de livraison</h3>
-    <input id="fullname" placeholder="Nom et prénom" />
     <input id="address" placeholder="Adresse" />
     <input id="city" placeholder="Ville" />
     <input id="postal" placeholder="Code postal" />
@@ -184,104 +67,100 @@
 </div>
 
 <script>
-  const products = [
-    { id: 1, name: "mk-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
-    { id: 2, name: "noopept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
-    { id: 3, name: "Rad-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" },
-    { id: 4, name: "hgh50iu", price: 60, image: "zuvzhuvhv.jpeg" }
-  ];
+const WEBHOOK_URL = "TON_WEBHOOK_DISCORD_ICI"; // ⚠️ remplace ici ton webhook
 
-  const cart = [];
-  const productsDiv = document.getElementById("products");
-  const cartItems = document.getElementById("cart-items");
-  const totalSpan = document.getElementById("total");
+const products = [
+  { id: 1, name: "MK-677", price: 45, image: "images/mk677.jpeg" },
+  { id: 2, name: "Noopept", price: 26.95, image: "images/noopept.jpeg" },
+  { id: 3, name: "RAD-140", price: 64.85, image: "images/rad140.jpeg" },
+  { id: 4, name: "HGH 50IU", price: 60, image: "hgh.jpeg" }
+];
 
-  function renderProducts() {
-    productsDiv.innerHTML = "";
-    products.forEach(p => {
-      const div = document.createElement("div");
-      div.className = "card";
-      div.innerHTML = `
-        <img src="${p.image}">
-        <h3>${p.name}</h3>
-        <p>${p.price} CHF</p>
-        <button onclick="addToCart(${p.id})">Ajouter au panier</button>
-      `;
-      productsDiv.appendChild(div);
-    });
-  }
+const cart = [];
+const productsDiv = document.getElementById("products");
+const cartItems = document.getElementById("cart-items");
+const totalSpan = document.getElementById("total");
 
-  function addToCart(id) {
-    const product = products.find(p => p.id === id);
-    cart.push(product);
-    renderCart();
-  }
+function renderProducts() {
+  productsDiv.innerHTML = "";
+  products.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="${p.image}">
+      <h3>${p.name}</h3>
+      <p>${p.price} CHF</p>
+      <button onclick="addToCart(${p.id})">Ajouter au panier</button>
+    `;
+    productsDiv.appendChild(div);
+  });
+}
 
-  function renderCart() {
-    cartItems.innerHTML = "";
-    let total = 0;
-    cart.forEach(item => {
-      total += item.price;
-      const li = document.createElement("li");
-      li.textContent = `${item.name} - ${item.price} CHF`;
-      cartItems.appendChild(li);
-    });
-    totalSpan.textContent = total.toFixed(2);
-  }
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  cart.push(product);
+  renderCart();
+}
 
-  function checkout() {
-    const fields = ["email","fullname","address","city","postal","country"];
-    for (let f of fields) {
-      if (!document.getElementById(f).value) {
-        alert("Merci de remplir toutes les informations.");
-        return;
-      }
-    }
-    alert("Commande enregistrée ✅");
-  }
+function renderCart() {
+  cartItems.innerHTML = "";
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price;
+    const li = document.createElement("li");
+    li.textContent = `${item.name} - ${item.price} CHF`;
+    cartItems.appendChild(li);
+  });
+  totalSpan.textContent = total.toFixed(2);
+}
 
-  renderProducts();
-</script>
-<script>
-const WEBHOOK_URL = "TON_NOUVEAU_WEBHOOK_DISCORD";
-
-document.getElementById("orderForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const prenom = document.getElementById("prenom").value;
-  const nom = document.getElementById("nom").value;
+function checkout() {
   const email = document.getElementById("email").value;
-  const adresse = document.getElementById("adresse").value;
-  const produit = document.getElementById("produit").value;
+  const fullname = document.getElementById("fullname").value;
+  const address = document.getElementById("address").value;
+  const city = document.getElementById("city").value;
+  const postal = document.getElementById("postal").value;
+  const country = document.getElementById("country").value;
 
-  fetch(WEBHOOK_URL, {
+  if (!email || !fullname || !address || !city || !postal || !country || cart.length === 0) {
+    alert("Remplis tout et ajoute un produit.");
+    return;
+  }
+
+  let list = "";
+  let total = 0;
+  cart.forEach(p => {
+    list += `- ${p.name} (${p.price} CHF)\n`;
+    total += p.price;
+  });
+
+  fetch(https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       content:
 `🛒 NOUVELLE COMMANDE
-Prénom: ${prenom}
-Nom: ${nom}
-Email: ${email}
-Adresse: ${adresse}
-Produit: ${produit}`
+
+Nom : ${fullname}
+Email : ${email}
+
+Adresse :
+${address}
+${postal} ${city}
+${country}
+
+Produits :
+${list}
+
+Total : ${total.toFixed(2)} CHF`
     })
   });
 
-  document.getElementById("status").innerText = "Commande envoyée ✅";
-  this.reset();
-});
+  alert("Commande envoyée sur Discord ✅");
+}
+
+renderProducts();
 </script>
 
 </body>
 </html>
-<form id="orderForm">
-  <input type="text" id="prenom" placeholder="Prénom" required>
-  <input type="text" id="nom" placeholder="Nom" required>
-  <input type="email" id="email" placeholder="Email" required>
-  <textarea id="adresse" placeholder="Adresse complète" required></textarea>
-  <input type="text" id="produit" placeholder="Produit" required>
-  <button type="submit">Envoyer la commande</button>
-</form>
-
-<p id="status"></p>
