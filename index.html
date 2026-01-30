@@ -6,178 +6,169 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
   <style>
-/* ===== BASE EXISTANTE ===== */
-body { 
-  font-family: Arial, sans-serif; 
-  margin:0; 
-  background:#0f0f0f; 
-  color:#eaeaea; 
-}
+    /* ===== BASE (INCHANGÉE) ===== */
+    body {
+      font-family: Arial, sans-serif;
+      margin:0;
+      background:#0f0f0f;
+      color:#eaeaea;
+      animation: pageFade 0.6s ease;
+    }
 
-header { 
-  background:#111; 
-  padding:1.5rem; 
-  text-align:center; 
-  border-bottom:1px solid #333; 
-}
+    header {
+      background:#111;
+      padding:1.5rem;
+      text-align:center;
+      border-bottom:1px solid #333;
+    }
 
-header h1 { 
-  margin:0; 
-  font-size:2.4rem; 
-  letter-spacing:3px;
-}
+    header h1 {
+      margin:0;
+      font-size:2.2rem;
+    }
 
-header p { 
-  margin:.3rem 0 0; 
-  color:#aaa; 
-  font-size:.9rem; 
-}
+    header p {
+      margin:.3rem 0 0;
+      color:#aaa;
+      font-size:.9rem;
+    }
 
-/* ===== TEXTE AJOUTÉ ===== */
-.subtitle {
-  margin-top:.8rem;
-  font-size:1rem;
-  color:#6cf2c2;
-  animation: subtitleGlow 2s infinite;
-}
+    .container {
+      padding:2rem;
+      max-width:1200px;
+      margin:auto;
+    }
 
-@keyframes subtitleGlow {
-  0%,100% { text-shadow:0 0 5px #6cf2c2; }
-  50% { text-shadow:0 0 15px #6cf2c2; }
-}
+    h2 { margin-bottom:1rem; }
 
-/* ===== CONTAINER ===== */
-.container { 
-  padding:2rem; 
-  max-width:1200px; 
-  margin:auto; 
-}
+    .products {
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+      gap:1.5rem;
+    }
 
-.info-text {
-  margin-bottom:2rem;
-  color:#bbb;
-  line-height:1.6;
-  animation: fadeIn 1s ease;
-}
+    .card {
+      background:#1a1a1a;
+      border-radius:10px;
+      padding:1rem;
+      box-shadow:0 4px 12px rgba(0,0,0,0.6);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+      animation: cardFadeUp 0.5s ease both;
+    }
 
-@keyframes fadeIn {
-  from { opacity:0; transform:translateY(20px); }
-  to { opacity:1; transform:none; }
-}
+    .card:hover {
+      transform:translateY(-6px);
+      box-shadow:0 10px 25px rgba(0,0,0,0.8);
+    }
 
-/* ===== PRODUITS ===== */
-.products { 
-  display:grid; 
-  grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); 
-  gap:1.5rem; 
-}
+    .card img {
+      width:100%;
+      border-radius:8px;
+      margin-bottom:.7rem;
+    }
 
-.card { 
-  background:#1a1a1a; 
-  border-radius:12px; 
-  padding:1rem; 
-  box-shadow:0 4px 12px rgba(0,0,0,0.6); 
-  transition:0.3s ease; 
-  position:relative;
-}
+    .card h3 {
+      margin:.4rem 0;
+      text-transform:uppercase;
+    }
 
-.card:hover { 
-  transform:translateY(-6px); 
-  box-shadow:0 15px 35px rgba(108,242,194,0.3); 
-}
+    .card p {
+      font-weight:bold;
+      color:#6cf2c2;
+    }
 
-.badge {
-  position:absolute;
-  top:10px;
-  right:10px;
-  background:#6cf2c2;
-  color:#000;
-  font-size:.7rem;
-  font-weight:bold;
-  padding:.2rem .5rem;
-  border-radius:6px;
-}
+    .card button {
+      width:100%;
+      padding:.6rem;
+      border:none;
+      border-radius:6px;
+      background:#6cf2c2;
+      color:#000;
+      font-weight:bold;
+      cursor:pointer;
+      transition: transform 0.15s ease, background 0.15s ease;
+    }
 
-.card img { 
-  width:100%; 
-  border-radius:8px; 
-  margin-bottom:.7rem; 
-}
+    .card button:hover {
+      background:#4fd3a6;
+    }
 
-.card h3 { 
-  margin:.4rem 0; 
-  text-transform:uppercase; 
-}
+    .card button:active {
+      transform:scale(0.97);
+    }
 
-.card .desc {
-  font-size:.85rem;
-  color:#aaa;
-  margin-bottom:.4rem;
-}
+    #cart {
+      margin-top:3rem;
+      background:#1a1a1a;
+      padding:1.5rem;
+      border-radius:10px;
+      animation: cartFadeUp 0.6s ease;
+    }
 
-.card p { 
-  font-weight:bold; 
-  color:#6cf2c2; 
-}
+    #cart ul {
+      list-style:none;
+      padding:0;
+    }
 
-.card button { 
-  width:100%; 
-  padding:.6rem; 
-  border:none; 
-  border-radius:6px; 
-  background:#6cf2c2; 
-  color:#000; 
-  font-weight:bold; 
-  cursor:pointer; 
-}
+    #cart li {
+      padding:.4rem 0;
+      border-bottom:1px solid #333;
+    }
 
-.card button:hover { 
-  background:#4fd3a6; 
-}
+    input {
+      width:100%;
+      padding:.6rem;
+      margin-bottom:.6rem;
+      border-radius:6px;
+      border:none;
+    }
 
-/* ===== PANIER ===== */
-#cart { 
-  margin-top:3rem; 
-  background:#1a1a1a; 
-  padding:1.5rem; 
-  border-radius:12px; 
-}
+    code {
+      display:block;
+      background:#000;
+      padding:.6rem;
+      border-radius:6px;
+      font-size:.85rem;
+      color:#6cf2c2;
+      word-break:break-all;
+    }
 
-#cart ul { list-style:none; padding:0; }
+    button {
+      margin-top:1rem;
+      width:100%;
+      padding:.8rem;
+      border:none;
+      border-radius:6px;
+      background:#6cf2c2;
+      color:#000;
+      font-weight:bold;
+      cursor:pointer;
+      transition: transform 0.15s ease;
+    }
 
-#cart li { 
-  padding:.4rem 0; 
-  border-bottom:1px solid #333; 
-}
+    button:hover {
+      background:#4fd3a6;
+    }
 
-/* ===== INPUTS ===== */
-input { 
-  width:100%; 
-  padding:.6rem; 
-  margin-bottom:.6rem; 
-  border-radius:6px; 
-  border:none; 
-  background:#0c0c0c;
-  color:#fff;
-}
+    button:active {
+      transform:scale(0.97);
+    }
 
-/* ===== CODE ===== */
-code { 
-  display:block; 
-  background:#000; 
-  padding:.6rem; 
-  border-radius:6px; 
-  font-size:.85rem; 
-  color:#6cf2c2; 
-}
+    /* ===== ANIMATIONS (LÉGÈRES) ===== */
+    @keyframes pageFade {
+      from { opacity:0; }
+      to { opacity:1; }
+    }
 
-/* ===== FOOTER TEXTE ===== */
-.footer {
-  margin-top:3rem;
-  text-align:center;
-  font-size:.8rem;
-  color:#666;
-}
+    @keyframes cardFadeUp {
+      from { opacity:0; transform:translateY(15px); }
+      to { opacity:1; transform:translateY(0); }
+    }
+
+    @keyframes cartFadeUp {
+      from { opacity:0; transform:translateY(20px); }
+      to { opacity:1; transform:translateY(0); }
+    }
   </style>
 </head>
 
@@ -186,16 +177,9 @@ code {
 <header>
   <h1>MyRoids</h1>
   <p>research use only</p>
-  <div class="subtitle">Premium compounds • Discreet shipping • Crypto only</div>
 </header>
 
 <div class="container">
-
-  <div class="info-text">
-    Tous nos produits sont sélectionnés pour leur qualité et leur traçabilité.
-    Paiement en crypto uniquement. Livraison rapide et discrète.
-  </div>
-
   <h2>Produits</h2>
   <div class="products" id="products"></div>
 
@@ -220,15 +204,104 @@ code {
 
     <button onclick="checkout()">J'ai payé</button>
   </div>
-
-  <div class="footer">
-    © 2026 MyRoids – All rights reserved
-  </div>
-
 </div>
 
 <script>
-/* JS IDENTIQUE AU TIEN – PAS TOUCHÉ */
+const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B";
+const BOT_NAME = "Spidey Bot";
+
+const products = [
+  { id: 1, name: "MK-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
+  { id: 2, name: "Noopept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
+  { id: 3, name: "RAD-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" },
+  { id: 4, name: "HGH 50IU", price: 60, image: "hgh.jpeg" }
+];
+
+const cart = [];
+const productsDiv = document.getElementById("products");
+const cartItems = document.getElementById("cart-items");
+const totalSpan = document.getElementById("total");
+
+function renderProducts() {
+  productsDiv.innerHTML = "";
+  products.forEach(p => {
+    const div = document.createElement("div");
+    div.className = "card";
+    div.innerHTML = `
+      <img src="${p.image}" alt="${p.name}">
+      <h3>${p.name}</h3>
+      <p>${p.price} CHF</p>
+      <button onclick="addToCart(${p.id})">Ajouter au panier</button>
+    `;
+    productsDiv.appendChild(div);
+  });
+}
+
+function addToCart(id) {
+  const product = products.find(p => p.id === id);
+  cart.push(product);
+  renderCart();
+}
+
+function renderCart() {
+  cartItems.innerHTML = "";
+  let total = 0;
+  cart.forEach(item => {
+    total += item.price;
+    const li = document.createElement("li");
+    li.textContent = `${item.name} - ${item.price} CHF`;
+    cartItems.appendChild(li);
+  });
+  totalSpan.textContent = total.toFixed(2);
+}
+
+function checkout() {
+  const email = document.getElementById("email").value;
+  const fullname = document.getElementById("fullname").value;
+  const address = document.getElementById("address").value;
+  const city = document.getElementById("city").value;
+  const postal = document.getElementById("postal").value;
+  const country = document.getElementById("country").value;
+
+  if (!email || !fullname || !address || !city || !postal || !country || cart.length === 0) {
+    alert("Remplis tout et ajoute un produit.");
+    return;
+  }
+
+  let list = "";
+  let total = 0;
+  cart.forEach(p => {
+    list += `- ${p.name} (${p.price} CHF)\n`;
+    total += p.price;
+  });
+
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      username: BOT_NAME,
+      content:
+`🛒 **NOUVELLE COMMANDE**
+
+Nom : ${fullname}
+Email : ${email}
+
+Adresse :
+${address}
+${postal} ${city}
+${country}
+
+Produits :
+${list}
+
+Total : ${total.toFixed(2)} CHF`
+    })
+  });
+
+  alert("Commande envoyée sur Discord ✅");
+}
+
+renderProducts();
 </script>
 
 </body>
