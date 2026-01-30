@@ -1,166 +1,317 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>MyRoids</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
 
-  <style>
-    body { font-family: Arial, sans-serif; margin:0; background:#0f0f0f; color:#eaeaea; }
-    header { background:#111; padding:1.5rem; text-align:center; border-bottom:1px solid #333; }
-    header h1 { margin:0; font-size:2.2rem; }
-    header p { margin:.3rem 0 0; color:#aaa; font-size:.9rem; }
-    .container { padding:2rem; max-width:1200px; margin:auto; }
-    h2 { margin-bottom:1rem; }
-    .products { display:grid; grid-template-columns:repeat(auto-fit,minmax(220px,1fr)); gap:1.5rem; }
-    .card { background:#1a1a1a; border-radius:10px; padding:1rem; box-shadow:0 4px 12px rgba(0,0,0,0.6); transition:0.2s ease; }
-    .card:hover { transform:translateY(-5px); box-shadow:0 10px 25px rgba(0,0,0,0.8); }
-    .card img { width:100%; border-radius:8px; margin-bottom:.7rem; }
-    .card h3 { margin:.4rem 0; text-transform:uppercase; }
-    .card p { font-weight:bold; color:#6cf2c2; }
-    .card button { width:100%; padding:.6rem; border:none; border-radius:6px; background:#6cf2c2; color:#000; font-weight:bold; cursor:pointer; }
-    .card button:hover { background:#4fd3a6; }
-    #cart { margin-top:3rem; background:#1a1a1a; padding:1.5rem; border-radius:10px; }
-    #cart ul { list-style:none; padding:0; }
-    #cart li { padding:.4rem 0; border-bottom:1px solid #333; }
-    input { width:100%; padding:.6rem; margin-bottom:.6rem; border-radius:6px; border:none; }
-    code { display:block; background:#000; padding:.6rem; border-radius:6px; font-size:.85rem; color:#6cf2c2; word-break:break-all; }
-    button { margin-top:1rem; width:100%; padding:.8rem; border:none; border-radius:6px; background:#6cf2c2; color:#000; font-weight:bold; cursor:pointer; }
-    button:hover { background:#4fd3a6; }
-  </style>
-</head>
-
-<body>
-
-<header>
-  <h1>MyRoids</h1>
-  <p>research use only</p>
-</header>
-
-<div class="container">
-  <h2>Produits</h2>
-  <div class="products" id="products"></div>
-
-  <div id="cart">
-    <h2>Panier</h2>
-    <ul id="cart-items"></ul>
-    <p><strong>Total :</strong> <span id="total">0</span> CHF</p>
-
-    <h3>Informations client</h3>
-    <input id="email" type="email" placeholder="Adresse e-mail" />
-    <input id="fullname" placeholder="Nom et prénom" />
-
-    <h3>Adresse de livraison</h3>
-    <input id="address" placeholder="Adresse" />
-    <input id="city" placeholder="Ville" />
-    <input id="postal" placeholder="Code postal" />
-    <input id="country" placeholder="Pays" />
-
-    <h3>Paiement crypto</h3>
-    <p>Envoyer exactement le montant à l'adresse suivante :</p>
-    <code>bc1plqev0krxgq82yvsf87pleh5taa2hsxg7systteu7lrls3q2u8n3suq6lpv</code>
-
-    <button onclick="checkout()">J'ai payé</button>
-  </div>
-</div>
-
-<script>
-const WEBHOOK_URL = "https://discordapp.com/api/webhooks/1466829002823045294/BWK0hfGPzpc-pLslhufoPbtRz-Q1ZkcobrfA5SsVAKNVRWWgvJ6GlbT1gmO4D54uFu2B";
-const BOT_NAME = "Spidey Bot";
-
-const products = [
-  { id: 1, name: "MK-677", price: 45, image: "WhatsApp Image 2026-01-28 at 14.26.50 (2).jpeg" },
-  { id: 2, name: "Noopept", price: 26.95, image: "WhatsApp Image 2026-01-28 at 14.26.50 (1).jpeg" },
-  { id: 3, name: "RAD-140", price: 64.85, image: "WhatsApp Image 2026-01-28 at 14.26.50.jpeg" },
-  { id: 4, name: "HGH 50IU", price: 60, image: "hgh.jpeg" }
-];
-
-const cart = [];
-const productsDiv = document.getElementById("products");
-const cartItems = document.getElementById("cart-items");
-const totalSpan = document.getElementById("total");
-
-function renderProducts() {
-  productsDiv.innerHTML = "";
-  products.forEach(p => {
-    const div = document.createElement("div");
-    div.className = "card";
-    div.innerHTML = `
-      <img src="${p.image}" alt="${p.name}">
-      <h3>${p.name}</h3>
-      <p>${p.price} CHF</p>
-      <button onclick="addToCart(${p.id})">Ajouter au panier</button>
-    `;
-    productsDiv.appendChild(div);
-  });
+/* ================== GOD MODE CSS ================== */
+* {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
 }
 
-function addToCart(id) {
-  const product = products.find(p => p.id === id);
-  cart.push(product);
-  renderCart();
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  background:
+    repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,0.02),
+      rgba(255,255,255,0.02) 1px,
+      transparent 1px,
+      transparent 2px
+    ),
+    radial-gradient(circle at top, #1e1e1e, #050505);
+  color: #eaeaea;
+  animation: bodyBoot 1.6s ease forwards;
+  overflow-x: hidden;
 }
 
-function renderCart() {
-  cartItems.innerHTML = "";
-  let total = 0;
-  cart.forEach(item => {
-    total += item.price;
-    const li = document.createElement("li");
-    li.textContent = `${item.name} - ${item.price} CHF`;
-    cartItems.appendChild(li);
-  });
-  totalSpan.textContent = total.toFixed(2);
+@keyframes bodyBoot {
+  0% { opacity:0; filter: blur(20px) brightness(0.3); }
+  100% { opacity:1; filter:none; }
 }
 
-function checkout() {
-  const email = document.getElementById("email").value;
-  const fullname = document.getElementById("fullname").value;
-  const address = document.getElementById("address").value;
-  const city = document.getElementById("city").value;
-  const postal = document.getElementById("postal").value;
-  const country = document.getElementById("country").value;
-
-  if (!email || !fullname || !address || !city || !postal || !country || cart.length === 0) {
-    alert("Remplis tout et ajoute un produit.");
-    return;
-  }
-
-  let list = "";
-  let total = 0;
-  cart.forEach(p => {
-    list += `- ${p.name} (${p.price} CHF)\n`;
-    total += p.price;
-  });
-
-  fetch(WEBHOOK_URL, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      username: BOT_NAME,
-      content:
-`🛒 **NOUVELLE COMMANDE**
-
-Nom : ${fullname}
-Email : ${email}
-
-Adresse :
-${address}
-${postal} ${city}
-${country}
-
-Produits :
-${list}
-
-Total : ${total.toFixed(2)} CHF`
-    })
-  });
-
-  alert("Commande envoyée sur Discord ✅");
+/* ================== SCANLINES ================== */
+body::after {
+  content:"";
+  position: fixed;
+  inset:0;
+  background: linear-gradient(
+    rgba(255,255,255,0.03) 50%,
+    rgba(0,0,0,0.05) 50%
+  );
+  background-size: 100% 4px;
+  pointer-events:none;
+  mix-blend-mode: overlay;
 }
 
-renderProducts();
-</script>
+/* ================== HEADER ================== */
+header {
+  background: linear-gradient(145deg,#0b0b0b,#151515);
+  padding: 2rem;
+  text-align:center;
+  border-bottom:1px solid #333;
+  position: relative;
+  overflow:hidden;
+}
 
-</body>
-</html>
+header::before {
+  content:"";
+  position:absolute;
+  inset:-200%;
+  background: conic-gradient(
+    from 0deg,
+    transparent,
+    #6cf2c2,
+    transparent
+  );
+  animation: hyperRotate 10s linear infinite;
+  opacity:.2;
+}
+
+@keyframes hyperRotate {
+  to { transform: rotate(360deg); }
+}
+
+header h1 {
+  margin:0;
+  font-size:2.6rem;
+  letter-spacing:4px;
+  text-transform:uppercase;
+  animation: glitch 2.5s infinite;
+}
+
+@keyframes glitch {
+  0% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  20% { text-shadow: -2px 0 red, 2px 0 cyan; }
+  40% { text-shadow: 2px 0 red, -2px 0 cyan; }
+  100% { text-shadow:none; }
+}
+
+header p {
+  color:#aaa;
+  animation: flicker 3s infinite;
+}
+
+@keyframes flicker {
+  0%,100%{opacity:1;}
+  50%{opacity:.6;}
+}
+
+/* ================== CONTAINER ================== */
+.container {
+  padding:2.2rem;
+  max-width:1200px;
+  margin:auto;
+  animation: containerZoom .9s ease;
+}
+
+@keyframes containerZoom {
+  from { transform:scale(.94); opacity:0; }
+  to { transform:scale(1); opacity:1; }
+}
+
+/* ================== TITLES ================== */
+h2,h3 {
+  position:relative;
+}
+
+h2::after,h3::after {
+  content:"";
+  display:block;
+  width:80px;
+  height:3px;
+  background:#6cf2c2;
+  margin-top:.5rem;
+  animation: barGrow 1.4s ease;
+}
+
+@keyframes barGrow {
+  from { width:0; }
+  to { width:80px; }
+}
+
+/* ================== PRODUCTS GRID ================== */
+.products {
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
+  gap:2rem;
+  perspective:1200px;
+}
+
+/* ================== CARD ================== */
+.card {
+  background: linear-gradient(145deg,#101010,#1d1d1d);
+  border-radius:16px;
+  padding:1.1rem;
+  box-shadow:0 20px 50px rgba(0,0,0,.9);
+  transform-style:preserve-3d;
+  animation: cardSpawn .9s ease both;
+  position:relative;
+  overflow:hidden;
+}
+
+@keyframes cardSpawn {
+  from { opacity:0; transform:translateY(60px) rotateX(20deg); }
+  to { opacity:1; transform:none; }
+}
+
+.card:hover {
+  transform:
+    translateY(-14px)
+    rotateX(6deg)
+    rotateY(-6deg)
+    scale(1.04);
+  box-shadow:0 30px 70px rgba(108,242,194,.35);
+}
+
+.card::before {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: linear-gradient(
+    120deg,
+    transparent,
+    rgba(108,242,194,.3),
+    transparent
+  );
+  transform: translateX(-120%);
+}
+
+.card:hover::before {
+  animation: shine 1.3s ease;
+}
+
+@keyframes shine {
+  to { transform:translateX(120%); }
+}
+
+.card img {
+  width:100%;
+  border-radius:12px;
+  transition:.5s ease;
+}
+
+.card:hover img {
+  transform:scale(1.12) rotate(1deg);
+}
+
+.card h3 {
+  margin:.6rem 0;
+  letter-spacing:1px;
+}
+
+.card p {
+  color:#6cf2c2;
+  font-weight:bold;
+  animation: neonPulse 2s infinite;
+}
+
+@keyframes neonPulse {
+  0%,100% { text-shadow:0 0 6px #6cf2c2; }
+  50% { text-shadow:0 0 22px #6cf2c2; }
+}
+
+/* ================== BUTTONS ================== */
+button {
+  width:100%;
+  padding:.9rem;
+  border:none;
+  border-radius:10px;
+  background: linear-gradient(135deg,#6cf2c2,#4fd3a6);
+  font-weight:bold;
+  cursor:pointer;
+  position:relative;
+  overflow:hidden;
+}
+
+button::after {
+  content:"";
+  position:absolute;
+  inset:0;
+  background: radial-gradient(circle, rgba(255,255,255,.6), transparent 60%);
+  opacity:0;
+}
+
+button:hover::after {
+  animation: clickFlash .6s ease;
+}
+
+@keyframes clickFlash {
+  from { opacity:.6; }
+  to { opacity:0; }
+}
+
+button:hover {
+  transform:scale(1.08);
+  box-shadow:0 0 35px rgba(108,242,194,.7);
+}
+
+button:active {
+  animation: shake .3s;
+}
+
+@keyframes shake {
+  0%{transform:translateX(0);}
+  25%{transform:translateX(-3px);}
+  50%{transform:translateX(3px);}
+  100%{transform:translateX(0);}
+}
+
+/* ================== CART ================== */
+#cart {
+  margin-top:3.5rem;
+  background: linear-gradient(145deg,#141414,#202020);
+  padding:1.8rem;
+  border-radius:18px;
+  box-shadow:0 25px 60px rgba(0,0,0,.95);
+  animation: cartRise 1.2s ease;
+}
+
+@keyframes cartRise {
+  from { opacity:0; transform:translateY(80px); }
+  to { opacity:1; transform:none; }
+}
+
+#cart li {
+  padding:.5rem 0;
+  border-bottom:1px solid #333;
+  animation: listSlide .5s ease;
+}
+
+@keyframes listSlide {
+  from { opacity:0; transform:translateX(-40px); }
+  to { opacity:1; transform:none; }
+}
+
+/* ================== INPUTS ================== */
+input {
+  width:100%;
+  padding:.8rem;
+  margin-bottom:.7rem;
+  border-radius:10px;
+  border:none;
+  background:#0a0a0a;
+  color:white;
+  transition:.3s;
+}
+
+input:focus {
+  outline:none;
+  transform:scale(1.05);
+  box-shadow:0 0 25px rgba(108,242,194,.8);
+}
+
+/* ================== CODE BLOCK ================== */
+code {
+  display:block;
+  background:#000;
+  padding:1rem;
+  border-radius:10px;
+  color:#6cf2c2;
+  animation: terminalGlow 3s infinite;
+}
+
+@keyframes terminalGlow {
+  0%,100% { box-shadow:0 0 15px rgba(108,242,194,.4); }
+  50% { box-shadow:0 0 35px rgba(108,242,194,.9); }
+}
+
+</style>
