@@ -242,6 +242,46 @@
 
   renderProducts();
 </script>
+<script>
+const WEBHOOK_URL = "TON_NOUVEAU_WEBHOOK_DISCORD";
+
+document.getElementById("orderForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const prenom = document.getElementById("prenom").value;
+  const nom = document.getElementById("nom").value;
+  const email = document.getElementById("email").value;
+  const adresse = document.getElementById("adresse").value;
+  const produit = document.getElementById("produit").value;
+
+  fetch(WEBHOOK_URL, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      content:
+`🛒 NOUVELLE COMMANDE
+Prénom: ${prenom}
+Nom: ${nom}
+Email: ${email}
+Adresse: ${adresse}
+Produit: ${produit}`
+    })
+  });
+
+  document.getElementById("status").innerText = "Commande envoyée ✅";
+  this.reset();
+});
+</script>
 
 </body>
 </html>
+<form id="orderForm">
+  <input type="text" id="prenom" placeholder="Prénom" required>
+  <input type="text" id="nom" placeholder="Nom" required>
+  <input type="email" id="email" placeholder="Email" required>
+  <textarea id="adresse" placeholder="Adresse complète" required></textarea>
+  <input type="text" id="produit" placeholder="Produit" required>
+  <button type="submit">Envoyer la commande</button>
+</form>
+
+<p id="status"></p>
